@@ -14,19 +14,17 @@
         
         <button id="openDialog" type="button">Написать нам</button>
 
-        <dialog id="contactDialog" aria-labelledby="dialogTitle">
-            <h2 id="dialogTitle">Обратная связь</h2>
-
+        <dialog id="contactDialog">
+            <h2>Обратная связь</h2>
             <form id="contactForm" method="dialog" novalidate>
                 <label for="name">Имя *</label>
-                <input id="name" name="name" type="text" required minlength="2">
+                <input id="name" name="name" type="text" required>
 
                 <label for="email">E-mail *</label>
                 <input id="email" name="email" type="email" required>
 
                 <label for="phone">Телефон *</label>
-                <input id="phone" name="phone" type="tel" required 
-                       placeholder="+7 (900) 000-00-00">
+                <input id="phone" name="phone" type="tel" required placeholder="+7 (900) 000-00-00">
 
                 <label for="topic">Тема *</label>
                 <select id="topic" name="topic" required>
@@ -36,9 +34,9 @@
                 </select>
 
                 <label for="message">Сообщение *</label>
-                <textarea id="message" name="message" rows="4" required></textarea>
+                <textarea id="message" name="message" required></textarea>
 
-                <div class="form-actions">
+                               <div class="form-actions">
                     <button type="button" id="closeDialog">Закрыть</button>
                     <button type="submit">Отправить</button>
                 </div>
