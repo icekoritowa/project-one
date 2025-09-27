@@ -1,11 +1,47 @@
-// Получаем элементы
+// ===== ТЕКУЩАЯ ФУНКЦИОНАЛЬНОСТЬ ФОРМЫ =====
+
 const dlg = document.getElementById('contactDialog');
 const openBtn = document.getElementById('openDialog');
 const closeBtn = document.getElementById('closeDialog');
 const form = document.getElementById('contactForm');
 let lastActive = null;
 
-// Функция для показа ошибок валидации
+// Открытие модалки
+openBtn.addEventListener('click', () => {
+    lastActive = document.activeElement;
+    dlg.showModal();
+    dlg.querySelector('.form__input')?.focus();
+});
+
+// Закрытие модалки
+closeBtn.addEventListener('click', () => {
+    dlg.close('cancel');
+    form.reset();
+    resetFormErrors();
+});
+
+// Обработка отправки формы
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    if (!form.checkValidity()) {
+        showValidationErrors();
+        form.reportValidity();
+        return;
+    }
+    
+    alert('Форма успешно отправлена! Спасибо за обратную связь.');
+    dlg.close('success');
+    form.reset();
+    resetFormErrors();
+});
+
+// Возвращаем фокус при закрытии модалки
+dlg.addEventListener('close', () => {
+    lastActive?.focus();
+});
+
+// Функции валидации
 function showValidationErrors() {
     const elements = form.elements;
     
@@ -14,16 +50,11 @@ function showValidationErrors() {
             const isValid = el.checkValidity();
             el.setAttribute('aria-invalid', !isValid);
             
-            // Показываем кастомные сообщения для определенных ошибок
             if (!isValid) {
                 if (el.validity.typeMismatch && el.type === 'email') {
                     el.setCustomValidity('Введите корректный e-mail, например name@example.com');
-                } else if (el.validity.patternMismatch && el.id === 'phone') {
-                    el.setCustomValidity('Введите телефон в формате: +7 (900) 000-00-00');
                 } else if (el.validity.valueMissing) {
                     el.setCustomValidity('Это поле обязательно для заполнения');
-                } else {
-                    el.setCustomValidity('');
                 }
             } else {
                 el.setCustomValidity('');
@@ -32,91 +63,72 @@ function showValidationErrors() {
     }
 }
 
-// Открытие модалки
-openBtn.addEventListener('click', () => {
-    lastActive = document.activeElement;
-    dlg.showModal();
-    // Фокусируемся на первом поле формы
-    dlg.querySelector('input, select, textarea, button')?.focus();
-});
-
-// Закрытие модалки
-closeBtn.addEventListener('click', () => {
-    dlg.close('cancel');
-    form.reset();
-    // Сбрасываем состояние ошибок
+function resetFormErrors() {
     const elements = form.elements;
     for (let el of elements) {
         el.removeAttribute('aria-invalid');
         el.setCustomValidity('');
     }
+}
+
+// ===== ПЕРЕКЛЮЧАТЕЛЬ ТЕМЫ (ОПЦИОНАЛЬНО) =====
+
+const themeToggle = document.getElementById('themeToggle');
+const THEME_KEY = 'theme';
+
+// Проверяем сохранённую тему или системные настройки
+function initTheme() {
+    const savedTheme = localStorage.getItem(THEME_KEY);
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+        document.body.classList.add('theme-dark');
+        themeToggle?.setAttribute('aria-pressed', 'true');
+        themeToggle.textContent = '☀️ Тема';
+    }
+}
+
+// Переключение темы
+themeToggle?.addEventListener('click', () => {
+    const isDark = document.body.classList.toggle('theme-dark');
+    themeToggle.setAttribute('aria-pressed', String(isDark));
+    themeToggle.textContent = isDark ? '☀️ Тема' : '🌙 Тема';
+    localStorage.setItem(THEME_KEY, isDark ? 'dark' : 'light');
 });
 
-// Обработка отправки формы
-form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    // Сбрасываем предыдущие ошибки
-    const elements = form.elements;
-    for (let el of elements) {
-        el.setCustomValidity('');
-    }
-    
-    // Проверяем валидность формы
-    if (!form.checkValidity()) {
-        showValidationErrors();
-        form.reportValidity();
-        return;
-    }
-    
-    // Если форма валидна - показываем успех и закрываем
-    alert('Форма успешно отправлена! Спасибо за обратную связь.');
-    dlg.close('success');
-    form.reset();
-    
-    // Сбрасываем состояние ошибок
-    for (let el of elements) {
-        el.removeAttribute('aria-invalid');
-    }
+// Инициализация при загрузке
+document.addEventListener('DOMContentLoaded', initTheme);
+
+// ===== ПЛАВНАЯ ПРОКРУТКА ДЛЯ ЯКОРЕЙ =====
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
 });
 
-// Возвращаем фокус при закрытии модалки
-dlg.addEventListener('close', () => {
-    lastActive?.focus();
-});
+// ===== LAZY LOADING ДЛЯ ИЗОБРАЖЕНИЙ =====
 
-// Маска для телефона (дополнительное задание)
-const phone = document.getElementById('phone');
-phone?.addEventListener('input', (e) => {
-    let value = e.target.value.replace(/\D/g, '');
+document.addEventListener('DOMContentLoaded', function() {
+    const images = document.querySelectorAll('img[loading="lazy"]');
     
-    if (value.startsWith('8')) {
-        value = '7' + value.slice(1);
-    }
-    
-    if (value.startsWith('7') && value.length > 1) {
-        let formattedValue = '+7 (';
-        
-        if (value.length > 1) {
-            formattedValue += value.slice(1, 4);
-        }
-        
-        if (value.length >= 4) {
-            formattedValue += ') ';
-        }
-        
-        if (value.length >= 5) {
-            formattedValue += value.slice(4, 7);
-        }
-        
-        if (value.length >= 8) {
-            formattedValue += '-' + value.slice(7, 9);
-        }
-        
-        if (value.length >= 10) {
-            formattedValue += '-' + value.slice(9, 11);
-        }
-        
-        e.target.value = formattedValue;
-    }
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src;
+                img.classList.remove('lazy');
+                imageObserver.unobserve(img);
+            }
+        });
+    });
+
+    images.forEach(img => imageObserver.observe(img));
 });
