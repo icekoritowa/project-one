@@ -1,26 +1,21 @@
-// ===== ТЕКУЩАЯ ФУНКЦИОНАЛЬНОСТЬ ФОРМЫ =====
-
 const dlg = document.getElementById('contactDialog');
 const openBtn = document.getElementById('openDialog');
 const closeBtn = document.getElementById('closeDialog');
 const form = document.getElementById('contactForm');
 let lastActive = null;
 
-// Открытие модалки
 openBtn.addEventListener('click', () => {
     lastActive = document.activeElement;
     dlg.showModal();
     dlg.querySelector('.form__input')?.focus();
 });
 
-// Закрытие модалки
 closeBtn.addEventListener('click', () => {
     dlg.close('cancel');
     form.reset();
     resetFormErrors();
 });
 
-// Обработка отправки формы
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     
@@ -36,12 +31,10 @@ form.addEventListener('submit', (e) => {
     resetFormErrors();
 });
 
-// Возвращаем фокус при закрытии модалки
 dlg.addEventListener('close', () => {
     lastActive?.focus();
 });
 
-// Функции валидации
 function showValidationErrors() {
     const elements = form.elements;
     
@@ -71,12 +64,10 @@ function resetFormErrors() {
     }
 }
 
-// ===== ПЕРЕКЛЮЧАТЕЛЬ ТЕМЫ (ОПЦИОНАЛЬНО) =====
 
 const themeToggle = document.getElementById('themeToggle');
 const THEME_KEY = 'theme';
 
-// Проверяем сохранённую тему или системные настройки
 function initTheme() {
     const savedTheme = localStorage.getItem(THEME_KEY);
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -88,7 +79,6 @@ function initTheme() {
     }
 }
 
-// Переключение темы
 themeToggle?.addEventListener('click', () => {
     const isDark = document.body.classList.toggle('theme-dark');
     themeToggle.setAttribute('aria-pressed', String(isDark));
@@ -96,10 +86,7 @@ themeToggle?.addEventListener('click', () => {
     localStorage.setItem(THEME_KEY, isDark ? 'dark' : 'light');
 });
 
-// Инициализация при загрузке
 document.addEventListener('DOMContentLoaded', initTheme);
-
-// ===== ПЛАВНАЯ ПРОКРУТКА ДЛЯ ЯКОРЕЙ =====
 
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -114,7 +101,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// ===== LAZY LOADING ДЛЯ ИЗОБРАЖЕНИЙ =====
 
 document.addEventListener('DOMContentLoaded', function() {
     const images = document.querySelectorAll('img[loading="lazy"]');
