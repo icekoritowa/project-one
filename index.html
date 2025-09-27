@@ -3,48 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Форма обратной связи</title>
+    <title>Форма обратной связи с БЭМ</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <main>
-        <h1>Демо страница с формой обратной связи</h1>
-        <p>Нажмите кнопку ниже чтобы открыть форму</p>
-        
-        <button id="openDialog" type="button">Написать нам</button>
+    <!-- Хедер с навигацией -->
+    <header class="header">
+        <div class="container header__container">
+            <a href="/" class="header__brand">МойПроект</a>
+            <nav class="nav">
+                <ul class="nav__list">
+                    <li><a href="#main" class="nav__link nav__link--active">Главная</a></li>
+                    <li><a href="#about" class="nav__link">О нас</a></li>
+                    <li><a href="#contact" class="nav__link">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-        <dialog id="contactDialog" aria-labelledby="dialogTitle">
-            <h2 id="dialogTitle">Обратная связь</h2>
+    <main class="container" id="main">
+        <!-- Герой-секция с фоновым изображением -->
+        <section class="hero">
+            <h1 class="hero__title">Добро пожаловать на наш сайт</h1>
+            <p class="hero__description">Мы создаём крутые веб-приложения с современным дизайном</p>
+        </section>
 
-            <form id="contactForm" method="dialog" novalidate>
-                <label for="name">Имя *</label>
-                <input id="name" name="name" type="text" required minlength="2">
+        <!-- Секция с формой -->
+        <section class="section">
+            <h2 class="section__title">Форма обратной связи</h2>
+            <p>Нажмите кнопку ниже чтобы открыть форму</p>
+            
+            <button class="button" id="openDialog" type="button">Написать нам</button>
+        </section>
 
-                <label for="email">E-mail *</label>
-                <input id="email" name="email" type="email" required>
+        <!-- Секция с изображением -->
+        <section class="section">
+            <h2 class="section__title">Наши работы</h2>
+            <div class="media">
+                <img src="https://picsum.photos/800/450" 
+                     alt="Пример нашего проекта" 
+                     class="media__image"
+                     width="800" 
+                     height="450"
+                     loading="lazy">
+            </div>
+        </section>
 
-                <label for="phone">Телефон *</label>
-                <input id="phone" name="phone" type="tel" required 
-                       placeholder="+7 (900) 000-00-00">
+        <!-- Секция с видео -->
+        <section class="section">
+            <h2 class="section__title">Видео о нас</h2>
+            <div class="media">
+                <video class="media__video" controls preload="metadata" poster="assets/video-poster.jpg">
+                    <source src="assets/demo-video.mp4" type="video/mp4">
+                    Ваш браузер не поддерживает видео.
+                </video>
+            </div>
+            
+            <!-- Альтернатива: видео с YouTube -->
+            <!-- <div class="media">
+                <iframe class="media__video" 
+                        src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                        title="Демонстрационное видео"
+                        allowfullscreen>
+                </iframe>
+            </div> -->
+        </section>
+    </main>
 
-                <label for="topic">Тема *</label>
-                <select id="topic" name="topic" required>
+    <!-- Модальное окно -->
+    <dialog class="modal" id="contactDialog" aria-labelledby="dialogTitle">
+        <h2 class="modal__title" id="dialogTitle">Обратная связь</h2>
+
+        <form class="form" id="contactForm" method="dialog" novalidate>
+            <div class="form__group">
+                <label for="name" class="form__label">Имя *</label>
+                <input id="name" name="name" type="text" class="form__input" required minlength="2">
+            </div>
+
+            <div class="form__group">
+                <label for="email" class="form__label">E-mail *</label>
+                <input id="email" name="email" type="email" class="form__input" required>
+            </div>
+
+            <div class="form__group">
+                <label for="phone" class="form__label">Телефон *</label>
+                <input id="phone" name="phone" type="tel" class="form__input" 
+                       placeholder="+7 (900) 000-00-00" required>
+                <small class="form__help">Формат: +7 (900) 000-00-00</small>
+            </div>
+
+            <div class="form__group">
+                <label for="topic" class="form__label">Тема *</label>
+                <select id="topic" name="topic" class="form__select" required>
                     <option value="">Выберите тему</option>
                     <option value="question">Вопрос</option>
                     <option value="order">Заказ</option>
                 </select>
+            </div>
 
-                <label for="message">Сообщение *</label>
-                <textarea id="message" name="message" rows="4" required></textarea>
+            <div class="form__group">
+                <label for="message" class="form__label">Сообщение *</label>
+                <textarea id="message" name="message" rows="4" class="form__textarea" required></textarea>
+            </div>
 
-                <div class="form-actions">
-                    <button type="button" id="closeDialog">Закрыть</button>
-                    <button type="submit">Отправить</button>
-                </div>
-            </form>
-        </dialog>
-    </main>
+            <div class="form__actions">
+                <button type="button" class="button button--secondary" id="closeDialog">Закрыть</button>
+                <button type="submit" class="button">Отправить</button>
+            </div>
+        </form>
+    </dialog>
+
+    <!-- Переключатель темы (опционально) -->
+    <button class="button" id="themeToggle" type="button" aria-pressed="false" 
+            style="position: fixed; bottom: 20px; right: 20px;">
+        🌙 Тема
+    </button>
 
     <script src="main.js"></script>
 </body>
