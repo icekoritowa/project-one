@@ -3,81 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Форма обратной связи с БЭМ</title>
+    <title>Главная</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <header class="header">
-        <div class="container header__container">
-            <a href="/" class="header__brand">МойПроект</a>
-            <nav class="nav">
-                <ul class="nav__list">
-                    <li><a href="#main" class="nav__link nav__link--active">Главная</a></li>
-                    <li><a href="#about" class="nav__link">О нас</a></li>
-                    <li><a href="#contact" class="nav__link">Контакты</a></li>
-                </ul>
-            </nav>
+    <header class="site-header">
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <a class="site-header__brand" href="/">Лого</a>
+                <nav class="site-nav" aria-label="Основная навигация">
+                    <ul class="site-nav__list">
+                        <li class="site-nav__item">
+                            <a class="site-nav__link" href="index.html">Главная</a>
+                        </li>
+                        <li class="site-nav__item">
+                            <a class="site-nav__link" href="about.html">О нас</a>
+                        </li>
+                        <li class="site-nav__item">
+                            <a class="site-nav__link site-nav__link--cta" href="#contacts">Связаться</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </div>
     </header>
 
-    <main class="container" id="main">
+    <main class="container">
+        <nav aria-label="Хлебные крошки">
+            <ul class="breadcrumbs">
+                <li class="breadcrumbs__item">
+                    <a class="breadcrumbs__link" href="index.html">Главная</a>
+                </li>
+            </ul>
+        </nav>
+
         <section class="hero">
-            <h1 class="hero__title">Добро пожаловать на наш сайт</h1>
-            <p class="hero__description">Мы создаём крутые веб-приложения с современным дизайном</p>
+            <h1>Добро пожаловать</h1>
+            <p>Описание сайта или призывающее к действию сообщение</p>
         </section>
 
-        <section class="section">
-            <h2 class="section__title">Форма обратной связи</h2>
-            <p>Нажмите кнопку ниже чтобы открыть форму</p>
-            <button class="button" id="openDialog" type="button">Написать нам</button>
-        </section>
-
-        <section class="section">
-            <h2 class="section__title">Наши работы</h2>
-            <div class="media">
-                <img src="https://picsum.photos/800/450" alt="Пример нашего проекта" class="media__image" loading="lazy">
+        <section class="section" id="about">
+            <h2 class="section__title">О нас</h2>
+            <div class="card">
+                <img class="card__img lazy" data-src="card-image.jpg" alt="Описание изображения" width="400" height="300" loading="lazy">
+                <div class="card__content">
+                    <h3>Заголовок карточки</h3>
+                    <p>Текст карточки с описанием.</p>
+                </div>
             </div>
         </section>
 
-        <section class="section">
-            <h2 class="section__title">Видео о нас</h2>
+        <section class="section" id="video">
+            <h2 class="section__title">Видео</h2>
             <div class="media">
-                <video class="media__video" controls preload="metadata">
-                    <source src="#" type="video/mp4">
+                <video controls preload="metadata" playsinline width="960" height="540" poster="video-poster.jpg">
+                    <source src="video/video.mp4" type="video/mp4">
+                    <source src="video/video.webm" type="video/webm">
+                    <track kind="captions" srclang="ru" src="video/captions.vtt" label="Русские субтитры">
                     Ваш браузер не поддерживает видео.
                 </video>
             </div>
         </section>
+
+        <section class="section" id="contacts">
+            <h2 class="section__title">Связаться с нами</h2>
+            <form class="form" id="contact-form" novalidate>
+                <div class="form__group">
+                    <label class="form__label" for="name">Имя</label>
+                    <input class="form__input" type="text" id="name" name="name" required>
+                    <div class="form__error">Пожалуйста, введите имя</div>
+                </div>
+                <div class="form__group">
+                    <label class="form__label" for="email">Email</label>
+                    <input class="form__input" type="email" id="email" name="email" required>
+                    <div class="form__error">Пожалуйста, введите корректный email</div>
+                </div>
+                <div class="form__group">
+                    <label class="form__label" for="message">Сообщение</label>
+                    <textarea class="form__textarea" id="message" name="message" rows="5" required></textarea>
+                    <div class="form__error">Пожалуйста, введите сообщение</div>
+                </div>
+                <button class="btn" type="submit">Отправить</button>
+            </form>
+        </section>
     </main>
 
-    <dialog class="modal" id="contactDialog">
-        <h2 class="modal__title">Обратная связь</h2>
-        <form class="form" id="contactForm" method="dialog" novalidate>
-            <div class="form__group">
-                <label for="name" class="form__label">Имя *</label>
-                <input id="name" name="name" type="text" class="form__input" required>
+    <div class="modal" id="success-modal" aria-hidden="true" aria-labelledby="modal-title">
+        <div class="modal__content" role="dialog" aria-modal="true">
+            <div class="modal__header">
+                <h3 id="modal-title">Успех!</h3>
+                <button class="modal__close" aria-label="Закрыть окно">×</button>
             </div>
-            <div class="form__group">
-                <label for="email" class="form__label">E-mail *</label>
-                <input id="email" name="email" type="email" class="form__input" required>
-            </div>
-            <div class="form__group">
-                <label for="phone" class="form__label">Телефон</label>
-                <input id="phone" name="phone" type="tel" class="form__input" placeholder="+7 (900) 000-00-00">
-            </div>
-            <div class="form__group">
-                <label for="message" class="form__label">Сообщение *</label>
-                <textarea id="message" name="message" class="form__textarea" required></textarea>
-            </div>
-            <div class="form__actions">
-                <button type="button" class="button button--secondary" id="closeDialog">Закрыть</button>
-                <button type="submit" class="button">Отправить</button>
-            </div>
-        </form>
-    </dialog>
+            <p>Ваше сообщение успешно отправлено!</p>
+            <button class="btn" data-close-modal>OK</button>
+        </div>
+    </div>
 
-    <button class="button" id="themeToggle" style="position: fixed; bottom: 20px; right: 20px;">🌙 Тема</button>
+    <button class="theme-toggle" type="button" aria-pressed="false">🌓</button>
 
     <script src="main.js"></script>
 </body>
