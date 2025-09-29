@@ -3,24 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Главная</title>
+    <title>EliteHouse - Продажа элитной недвижимости</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header class="site-header">
         <div class="container">
             <div style="display: flex; justify-content: space-between; align-items: center;">
-                <a class="site-header__brand" href="/">Лого</a>
+                <a class="site-header__brand" href="/">EliteHouse</a>
                 <nav class="site-nav" aria-label="Основная навигация">
                     <ul class="site-nav__list">
                         <li class="site-nav__item">
-                            <a class="site-nav__link" href="index.html">Главная</a>
+                            <a class="site-nav__link site-nav__link--active" href="index.html">Главная</a>
                         </li>
                         <li class="site-nav__item">
-                            <a class="site-nav__link" href="about.html">О нас</a>
+                            <a class="site-nav__link" href="catalog.html">Каталог</a>
                         </li>
                         <li class="site-nav__item">
-                            <a class="site-nav__link site-nav__link--cta" href="#contacts">Связаться</a>
+                            <a class="site-nav__link" href="about.html">О компании</a>
+                        </li>
+                        <li class="site-nav__item">
+                            <a class="site-nav__link site-nav__link--cta" href="#contacts">Консультация</a>
                         </li>
                     </ul>
                 </nav>
@@ -38,27 +41,74 @@
         </nav>
 
         <section class="hero">
-            <h1>Добро пожаловать</h1>
-            <p>Описание сайта или призывающее к действию сообщение</p>
+            <h1>Элитная недвижимость в Москве</h1>
+            <p>Подбор квартир премиум-класса в лучших районах города</p>
+            <button class="btn btn--large" onclick="openModal('consult-modal')">Бесплатная консультация</button>
         </section>
 
-        <section class="section" id="about">
-            <h2 class="section__title">О нас</h2>
-            <div class="card">
-                <img class="card__img lazy" data-src="card-image.jpg" alt="Описание изображения" width="400" height="300" loading="lazy">
-                <div class="card__content">
-                    <h3>Заголовок карточки</h3>
-                    <p>Текст карточки с описанием.</p>
+        <section class="section" id="features">
+            <h2 class="section__title">Почему выбирают нас</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--space-4);">
+                <div class="card">
+                    <div class="card__content">
+                        <h3>🏢 1500+ объектов</h3>
+                        <p>Большая база элитной недвижимости в Москве и области</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card__content">
+                        <h3>⚡ Быстрый подбор</h3>
+                        <p>Подберем идеальный вариант за 24 часа по вашим критериям</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card__content">
+                        <h3>🛡️ Юридическая гарантия</h3>
+                        <p>Полное юридическое сопровождение и проверка объектов</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="catalog">
+            <h2 class="section__title">Популярные объекты</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-4);">
+                <div class="card">
+                    <img class="card__img lazy" data-src="apartment1.jpg" alt="Апартаменты в Москва-Сити" width="400" height="300" loading="lazy">
+                    <div class="card__content">
+                        <h3>Москва-Сити</h3>
+                        <p>3-комнатная квартира, 120 м²</p>
+                        <p><strong>125 000 000 ₽</strong></p>
+                        <button class="btn" onclick="openModal('apartment1-modal')">Подробнее</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card__img lazy" data-src="apartment2.jpg" alt="Апартаменты на Патриарших" width="400" height="300" loading="lazy">
+                    <div class="card__content">
+                        <h3>Патриаршие пруды</h3>
+                        <p>4-комнатная квартира, 180 м²</p>
+                        <p><strong>98 000 000 ₽</strong></p>
+                        <button class="btn" onclick="openModal('apartment2-modal')">Подробнее</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card__img lazy" data-src="apartment3.jpg" alt="Апартаменты в Рублевке" width="400" height="300" loading="lazy">
+                    <div class="card__content">
+                        <h3>Рублевское шоссе</h3>
+                        <p>Коттедж, 350 м²</p>
+                        <p><strong>250 000 000 ₽</strong></p>
+                        <button class="btn" onclick="openModal('apartment3-modal')">Подробнее</button>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section class="section" id="video">
-            <h2 class="section__title">Видео</h2>
+            <h2 class="section__title">Видеообзор объектов</h2>
             <div class="media">
                 <video controls preload="metadata" playsinline width="960" height="540" poster="video-poster.jpg">
-                    <source src="video/video.mp4" type="video/mp4">
-                    <source src="video/video.webm" type="video/webm">
+                    <source src="video/property-tour.mp4" type="video/mp4">
+                    <source src="video/property-tour.webm" type="video/webm">
                     <track kind="captions" srclang="ru" src="video/captions.vtt" label="Русские субтитры">
                     Ваш браузер не поддерживает видео.
                 </video>
@@ -66,36 +116,67 @@
         </section>
 
         <section class="section" id="contacts">
-            <h2 class="section__title">Связаться с нами</h2>
+            <h2 class="section__title">Получить консультацию</h2>
             <form class="form" id="contact-form" novalidate>
                 <div class="form__group">
-                    <label class="form__label" for="name">Имя</label>
+                    <label class="form__label" for="name">Ваше имя</label>
                     <input class="form__input" type="text" id="name" name="name" required>
                     <div class="form__error">Пожалуйста, введите имя</div>
                 </div>
                 <div class="form__group">
-                    <label class="form__label" for="email">Email</label>
-                    <input class="form__input" type="email" id="email" name="email" required>
-                    <div class="form__error">Пожалуйста, введите корректный email</div>
+                    <label class="form__label" for="phone">Телефон</label>
+                    <input class="form__input" type="tel" id="phone" name="phone" required>
+                    <div class="form__error">Пожалуйста, введите телефон</div>
                 </div>
                 <div class="form__group">
-                    <label class="form__label" for="message">Сообщение</label>
-                    <textarea class="form__textarea" id="message" name="message" rows="5" required></textarea>
-                    <div class="form__error">Пожалуйста, введите сообщение</div>
+                    <label class="form__label" for="budget">Бюджет</label>
+                    <select class="form__select" id="budget" name="budget">
+                        <option value="">Выберите бюджет</option>
+                        <option value="50-100">50-100 млн ₽</option>
+                        <option value="100-200">100-200 млн ₽</option>
+                        <option value="200+">от 200 млн ₽</option>
+                    </select>
                 </div>
-                <button class="btn" type="submit">Отправить</button>
+                <div class="form__group">
+                    <label class="form__label" for="message">Ваши пожелания</label>
+                    <textarea class="form__textarea" id="message" name="message" rows="4"></textarea>
+                </div>
+                <button class="btn" type="submit">Отправить заявку</button>
             </form>
         </section>
     </main>
 
-    <div class="modal" id="success-modal" aria-hidden="true" aria-labelledby="modal-title">
+    <!-- Модалка консультации -->
+    <div class="modal" id="consult-modal" aria-hidden="true">
         <div class="modal__content" role="dialog" aria-modal="true">
             <div class="modal__header">
-                <h3 id="modal-title">Успех!</h3>
+                <h3>Бесплатная консультация</h3>
                 <button class="modal__close" aria-label="Закрыть окно">×</button>
             </div>
-            <p>Ваше сообщение успешно отправлено!</p>
-            <button class="btn" data-close-modal>OK</button>
+            <p>Наш специалист свяжется с вами в течение 15 минут для подбора недвижимости</p>
+            <form class="form">
+                <div class="form__group">
+                    <input class="form__input" type="text" placeholder="Ваше имя" required>
+                </div>
+                <div class="form__group">
+                    <input class="form__input" type="tel" placeholder="Телефон" required>
+                </div>
+                <button class="btn" type="submit">Жду звонка</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Модалки квартир -->
+    <div class="modal" id="apartment1-modal" aria-hidden="true">
+        <div class="modal__content" role="dialog" aria-modal="true">
+            <div class="modal__header">
+                <h3>Апартаменты в Москва-Сити</h3>
+                <button class="modal__close" aria-label="Закрыть окно">×</button>
+            </div>
+            <p><strong>Цена: 125 000 000 ₽</strong></p>
+            <p>3-комнатная квартира, 120 м²</p>
+            <p>Вид на город, высокий этаж, панорамные окна</p>
+            <button class="btn" onclick="openModal('consult-modal')">Записаться на просмотр</button>
         </div>
     </div>
 
