@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог недвижимости - EliteHouse</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="site-header__content">
+                <a class="site-header__brand" href="index.html">EliteHouse</a>
+                <nav class="site-nav" aria-label="Основная навигация">
+                    <ul class="site-nav__list">
+                        <li class="site-nav__item">
+                            <a class="site-nav__link" href="index.html">Главная</a>
+                        </li>
+                        <li class="site-nav__item">
+                            <a class="site-nav__link site-nav__link--active" href="catalog.html">Каталог</a>
+                        </li>
+                        <li class="site-nav__item">
+                            <a class="site-nav__link" href="about.html">О компании</a>
+                        </li>
+                        <li class="site-nav__item">
+                            <a class="site-nav__link" href="contacts.html">Контакты</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <nav aria-label="Хлебные крошки">
+            <ul class="breadcrumbs">
+                <li class="breadcrumbs__item">
+                    <a class="breadcrumbs__link" href="index.html">Главная</a>
+                </li>
+                <li class="breadcrumbs__item">
+                    <a class="breadcrumbs__link" href="catalog.html" aria-current="page">Каталог</a>
+                </li>
+            </ul>
+        </nav>
+
+        <section class="section">
+            <h1 class="page-title">Каталог недвижимости</h1>
+            <p class="page-subtitle">Подборка лучших объектов элитной недвижимости в Москве</p>
+
+            <!-- Фильтры -->
+            <div class="card" style="margin-bottom: var(--space-5);">
+                <div class="card__content">
+                    <h3 class="card__title">Фильтры поиска</h3>
+                    <form class="form" id="catalog-filters" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-4);">
+                        <div class="form__group">
+                            <label class="form__label" for="type">Тип недвижимости</label>
+                            <select class="form__select" id="type" name="type">
+                                <option value="">Все типы</option>
+                                <option value="apartment">Квартира</option>
+                                <option value="penthouse">Пентхаус</option>
+                                <option value="cottage">Коттедж</option>
+                                <option value="townhouse">Таунхаус</option>
+                            </select>
+                        </div>
+                        <div class="form__group">
+                            <label class="form__label" for="price">Бюджет</label>
+                            <select class="form__select" id="price" name="price">
+                                <option value="">Любой бюджет</option>
+                                <option value="50-100">50-100 млн ₽</option>
+                                <option value="100-200">100-200 млн ₽</option>
+                                <option value="200-500">200-500 млн ₽</option>
+                                <option value="500+">от 500 млн ₽</option>
+                            </select>
+                        </div>
+                        <div class="form__group">
+                            <label class="form__label" for="rooms">Количество комнат</label>
+                            <select class="form__select" id="rooms" name="rooms">
+                                <option value="">Любое</option>
+                                <option value="1">1 комната</option>
+                                <option value="2">2 комнаты</option>
+                                <option value="3">3 комнаты</option>
+                                <option value="4">4+ комнаты</option>
+                            </select>
+                        </div>
+                        <div class="form__group" style="align-self: end;">
+                            <button type="reset" class="btn btn--secondary">Сбросить</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Сетка объектов -->
+            <div class="catalog-grid">
+                <div class="card">
+                    <img class="card__img lazy" data-src="apartment1.jpg" alt="Апартаменты в Москва-Сити" width="400" height="300" loading="lazy">
+                    <div class="card__content">
+                        <h3 class="card__title">Москва-Сити</h3>
+                        <p class="card__description">3-комнатная квартира, 120 м² с панорамным видом на город</p>
+                        <ul class="card__features">
+                            <li class="card__feature">📍 Москва-Сити</li>
+                            <li class="card__feature">🏠 3 комнаты</li>
+                            <li class="card__feature">📐 120 м²</li>
+                            <li class="card__feature">🏙️ 45 этаж</li>
+                        </ul>
+                        <p class="card__price">125 000 000 ₽</p>
+                        <button class="btn" data-apartment="apartment1-modal">Подробнее</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img class="card__img lazy" data-src="apartment2.jpg" alt="Апартаменты на Патриарших" width="400" height="300" loading="lazy">
+                    <div class="card__content">
+                        <h3 class="card__title">Патриаршие пруды</h3>
+                        <p class="card__description">4-комнатная квартира в историческом центре с евроремонтом</p>
+                        <ul class="card__features">
+                            <li class="card__feature">📍 Патриаршие пруды</li>
+                            <li class="card__feature">🏠 4 комнаты</li>
+                            <li class="card__feature">📐 180 м²</li>
+                            <li class="card__feature">🚇 5 мин до метро</li>
+                        </ul>
+                        <p class="card__price">98 000 000 ₽</p>
+                        <button class="btn" data-apartment="apartment2-modal">Подробнее</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img class="card__img lazy" data-src="apartment3.jpg" alt="Коттедж в Рублевке" width="400" height="300" loading="lazy">
+                    <div class="card__content">
+                        <h3 class="card__title">Рублевское шоссе</h3>
+                        <p class="card__description">Элитный коттедж с бассейном и охраняемой территорией</p>
+                        <ul class="card__features">
+                            <li class="card__feature">📍 Рублевское шоссе</li>
+                            <li class="card__feature">🏠 Коттедж</li>
+                            <li class="card__feature">📐 350 м²</li>
+                            <li class="card__feature">🌳 15 соток</li>
+                        </ul>
+                        <p class="card__price">250 000 000 ₽</p>
+                        <button class="btn" data-apartment="apartment3-modal">Подробнее</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img class="card__img lazy" data-src="apartment4.jpg" alt="Пентхаус на Тверской" width="400" height="300" loading="lazy">
+                    <div class="card__content">
+                        <h3 class="card__title">Тверская улица</h3>
+                        <p class="card__description">Пентхаус с террасой и видом на Кремль</p>
+                        <ul class="card__features">
+                            <li class="card__feature">📍 Тверская улица</li>
+                            <li class="card__feature">🏠 Пентхаус</li>
+                            <li class="card__feature">📐 200 м²</li>
+                            <li class="card__feature">🌆 Вид на Кремль</li>
+                        </ul>
+                        <p class="card__price">180 000 000 ₽</p>
+                        <button class="btn" data-apartment="apartment4-modal">Подробнее</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img class="card__img lazy" data-src="apartment5.jpg" alt="Апартаменты в Хамовниках" width="400" height="300" loading="lazy">
+                    <div class="card__content">
+                        <h3 class="card__title">Хамовники</h3>
+                        <p class="card__description">2-комнатная квартира в новом ЖК с отделкой</p>
+                        <ul class="card__features">
+                            <li class="card__feature">📍 Хамовники</li>
+                            <li class="card__feature">🏠 2 комнаты</li>
+                            <li class="card__feature">📐 85 м²</li>
+                            <li class="card__feature">🏗️ Новостройка</li>
+                        </ul>
+                        <p class="card__price">75 000 000 ₽</p>
+                        <button class="btn" data-apartment="apartment5-modal">Подробнее</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img class="card__img lazy" data-src="apartment6.jpg" alt="Таунхаус в Кунцево" width="400" height="300" loading="lazy">
+                    <div class="card__content">
+                        <h3 class="card__title">Кунцево</h3>
+                        <p class="card__description">Таунхаус с садом и парковкой в закрытом поселке</p>
+                        <ul class="card__features">
+                            <li class="card__feature">📍 Кунцево</li>
+                            <li class="card__feature">🏠 Таунхаус</li>
+                            <li class="card__feature">📐 150 м²</li>
+                            <li class="card__feature">🚗 2 парковочных места</li>
+                        </ul>
+                        <p class="card__price">95 000 000 ₽</p>
+                        <button class="btn" data-apartment="apartment6-modal">Подробнее</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Пагинация -->
+            <div style="display: flex; justify-content: center; gap: var(--space-2); margin-top: var(--space-5);">
+                <button class="btn btn--secondary" disabled>Назад</button>
+                <button class="btn btn--secondary" disabled>1</button>
+                <button class="btn btn--secondary">2</button>
+                <button class="btn btn--secondary">3</button>
+                <button class="btn btn--secondary">Вперед</button>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>EliteHouse</h3>
+                    <p>Продажа элитной недвижимости в Москве. Подбор объектов премиум-класса.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Контакты</h3>
+                    <ul class="footer-links">
+                        <li>📞 +7 (495) 123-45-67</li>
+                        <li>✉️ info@elitehouse.ru</li>
+                        <li>📍 Москва, ул. Тверская, 1</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Навигация</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="catalog.html">Каталог</a></li>
+                        <li><a href="about.html">О компании</a></li>
+                        <li><a href="contacts.html">Контакты</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Дополнительные модалки для каталога -->
+    <div class="modal" id="apartment4-modal" aria-hidden="true">
+        <div class="modal__content" role="dialog" aria-modal="true">
+            <div class="modal__header">
+                <h3 class="modal__title">Пентхаус на Тверской</h3>
+                <button class="modal__close" aria-label="Закрыть окно">×</button>
+            </div>
+            <p><strong>Цена: 180 000 000 ₽</strong></p>
+            <p>Пентхаус, 200 м², терраса 50 м²</p>
+            <p>Вид на Кремль, высокие потолки, камин, система умный дом</p>
+            <button class="btn" data-consult>Записаться на просмотр</button>
+        </div>
+    </div>
+
+    <div class="modal" id="apartment5-modal" aria-hidden="true">
+        <div class="modal__content" role="dialog" aria-modal="true">
+            <div class="modal__header">
+                <h3 class="modal__title">Апартаменты в Хамовниках</h3>
+                <button class="modal__close" aria-label="Закрыть окно">×</button>
+            </div>
+            <p><strong>Цена: 75 000 000 ₽</strong></p>
+            <p>2-комнатная квартира, 85 м²</p>
+            <p>Новостройка, отделка премиум-класса, подземный паркинг, фитнес-центр</p>
+            <button class="btn" data-consult>Записаться на просмотр</button>
+        </div>
+    </div>
+
+    <div class="modal" id="apartment6-modal" aria-hidden="true">
+        <div class="modal__content" role="dialog" aria-modal="true">
+            <div class="modal__header">
+                <h3 class="modal__title">Таунхаус в Кунцево</h3>
+                <button class="modal__close" aria-label="Закрыть окно">×</button>
+            </div>
+            <p><strong>Цена: 95 000 000 ₽</strong></p>
+            <p>Таунхаус, 150 м², участок 3 сотки</p>
+            <p>Закрытый поселок, видеонаблюдение, детская площадка, гостевая парковка</p>
+            <button class="btn" data-consult>Записаться на просмотр</button>
+        </div>
+    </div>
+
+    <!-- Общие модалки -->
+    <div class="modal" id="consult-modal" aria-hidden="true">
+        <div class="modal__content" role="dialog" aria-modal="true">
+            <div class="modal__header">
+                <h3 class="modal__title">Бесплатная консультация</h3>
+                <button class="modal__close" aria-label="Закрыть окно">×</button>
+            </div>
+            <p>Наш специалист свяжется с вами в течение 15 минут для подбора недвижимости</p>
+            <form class="form">
+                <div class="form__group">
+                    <input class="form__input" type="text" placeholder="Ваше имя" required>
+                </div>
+                <div class="form__group">
+                    <input class="form__input" type="tel" placeholder="Телефон" required>
+                </div>
+                <button class="btn" type="submit">Жду звонка</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="success-modal" aria-hidden="true">
+        <div class="modal__content" role="dialog" aria-modal="true">
+            <div class="modal__header">
+                <h3 class="modal__title">Заявка отправлена!</h3>
+                <button class="modal__close" aria-label="Закрыть окно">×</button>
+            </div>
+            <p>Спасибо за вашу заявку! Наш менеджер свяжется с вами в течение 15 минут.</p>
+            <button class="btn" data-close-modal>OK</button>
+        </div>
+    </div>
+
+    <button class="theme-toggle" type="button" aria-pressed="false">🌓</button>
+
+    <script src="main.js"></script>
+</body>
+</html>
