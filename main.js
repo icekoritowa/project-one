@@ -20,7 +20,6 @@ function openModal(modalId) {
     if (modal) {
         modal.classList.add('modal--open');
         modal.setAttribute('aria-hidden', 'false');
-        
         const firstFocusable = modal.querySelector('button, input, [tabindex]');
         firstFocusable?.focus();
     }
@@ -34,26 +33,9 @@ function closeModal(modalId) {
     }
 }
 
-function handleFormSubmit(formId, successModalId) {
-    const form = document.getElementById(formId);
-    if (!form) return;
-
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        if (this.checkValidity()) {
-            openModal(successModalId);
-            this.reset();
-        } else {
-            this.reportValidity();
-        }
-    });
-}
-
 function initNavigation() {
     const currentPage = window.location.pathname.split('/').pop();
     const navLinks = document.querySelectorAll('.site-nav__link');
-    
     navLinks.forEach(link => {
         link.classList.remove('site-nav__link--active');
         if (link.getAttribute('href') === currentPage) {
@@ -111,29 +93,7 @@ function initResponsiveImages() {
     });
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    initTheme();
-    initNavigation();
-    initModalCloseHandlers();
-    initLazyLoading();
-    initResponsiveImages();
-    
-    handleFormSubmit('contact-form', 'success-modal');
-    
-    if (themeToggle) {
-        themeToggle.addEventListener('click', toggleTheme);
-    }
-
-    const modalCloses = document.querySelectorAll('.modal__close');
-    modalCloses.forEach(btn => {
-        btn.addEventListener('click', function() {
-            const modal = this.closest('.modal');
-            closeModal(modal.id);
-        });
-    });
-
 function initRealEstateModals() {
-  
     const apartmentButtons = document.querySelectorAll('[onclick*="apartment"]');
     apartmentButtons.forEach(btn => {
         const originalOnClick = btn.getAttribute('onclick');
@@ -145,26 +105,50 @@ function initRealEstateModals() {
     });
 }
 
+function handleRealEstateForm(formId, successModalId) {
+    const form = document.getElementById(formId);
+    if (!form) return;
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        if (!this.checkValidity()) {
+            this.reportValidity();
+            return;
+        }
+
+        const formData = new FormData(this);
+        const data = {
+            name: formData.get('name'),
+            phone: formData.get('phone'),
+            budget: formData.get('budget'),
+            message: formData.get('message')
+        };
+
+        console.log('Данные формы:', data);
+        openModal(successModalId);
+        this.reset();
+    });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     initTheme();
     initNavigation();
     initModalCloseHandlers();
     initLazyLoading();
     initResponsiveImages();
-    initRealEstateModals(); 
-    
-    handleFormSubmit('contact-form', 'success-modal');
+    initRealEstateModals();
+    handleRealEstateForm('contact-form', 'success-modal');
     
     if (themeToggle) {
         themeToggle.addEventListener('click', toggleTheme);
     }
 
-    const modalCloses = document.querySelectorAll('.modal__close');
+    const modalCloses = document.querySelectorAll('.modal__close, [data-close-modal]');
     modalCloses.forEach(btn => {
         btn.addEventListener('click', function() {
             const modal = this.closest('.modal');
             closeModal(modal.id);
         });
     });
-});
 });

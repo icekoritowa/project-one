@@ -79,7 +79,7 @@
                         <h3>Москва-Сити</h3>
                         <p>3-комнатная квартира, 120 м²</p>
                         <p><strong>125 000 000 ₽</strong></p>
-                        <button class="btn" onclick="openModal('apartment1-modal')">Подробнее</button>
+                        <button class="btn" data-apartment="apartment1-modal">Подробнее</button>
                     </div>
                 </div>
                 <div class="card">
@@ -88,7 +88,7 @@
                         <h3>Патриаршие пруды</h3>
                         <p>4-комнатная квартира, 180 м²</p>
                         <p><strong>98 000 000 ₽</strong></p>
-                        <button class="btn" onclick="openModal('apartment2-modal')">Подробнее</button>
+                        <button class="btn" data-apartment="apartment2-modal">Подробнее</button>
                     </div>
                 </div>
                 <div class="card">
@@ -97,7 +97,7 @@
                         <h3>Рублевское шоссе</h3>
                         <p>Коттедж, 350 м²</p>
                         <p><strong>250 000 000 ₽</strong></p>
-                        <button class="btn" onclick="openModal('apartment3-modal')">Подробнее</button>
+                        <button class="btn" data-apartment="apartment3-modal">Подробнее</button>
                     </div>
                 </div>
             </div>
@@ -146,7 +146,6 @@
         </section>
     </main>
 
-    <!-- Модалка консультации -->
     <div class="modal" id="consult-modal" aria-hidden="true">
         <div class="modal__content" role="dialog" aria-modal="true">
             <div class="modal__header">
@@ -166,7 +165,6 @@
         </div>
     </div>
 
-    <!-- Модалки квартир -->
     <div class="modal" id="apartment1-modal" aria-hidden="true">
         <div class="modal__content" role="dialog" aria-modal="true">
             <div class="modal__header">
@@ -177,6 +175,43 @@
             <p>3-комнатная квартира, 120 м²</p>
             <p>Вид на город, высокий этаж, панорамные окна</p>
             <button class="btn" onclick="openModal('consult-modal')">Записаться на просмотр</button>
+        </div>
+    </div>
+
+    <div class="modal" id="apartment2-modal" aria-hidden="true">
+        <div class="modal__content" role="dialog" aria-modal="true">
+            <div class="modal__header">
+                <h3>Апартаменты на Патриарших</h3>
+                <button class="modal__close" aria-label="Закрыть окно">×</button>
+            </div>
+            <p><strong>Цена: 98 000 000 ₽</strong></p>
+            <p>4-комнатная квартира, 180 м²</p>
+            <p>Исторический центр, высокие потолки, евроремонт</p>
+            <button class="btn" onclick="openModal('consult-modal')">Записаться на просмотр</button>
+        </div>
+    </div>
+
+    <div class="modal" id="apartment3-modal" aria-hidden="true">
+        <div class="modal__content" role="dialog" aria-modal="true">
+            <div class="modal__header">
+                <h3>Коттедж в Рублевке</h3>
+                <button class="modal__close" aria-label="Закрыть окно">×</button>
+            </div>
+            <p><strong>Цена: 250 000 000 ₽</strong></p>
+            <p>Коттедж, 350 м², участок 15 соток</p>
+            <p>Собственный бассейн, сауна, охраняемая территория</p>
+            <button class="btn" onclick="openModal('consult-modal')">Записаться на просмотр</button>
+        </div>
+    </div>
+
+    <div class="modal" id="success-modal" aria-hidden="true">
+        <div class="modal__content" role="dialog" aria-modal="true">
+            <div class="modal__header">
+                <h3>Заявка отправлена!</h3>
+                <button class="modal__close" aria-label="Закрыть окно">×</button>
+            </div>
+            <p>Спасибо за вашу заявку! Наш менеджер свяжется с вами в течение 15 минут.</p>
+            <button class="btn" data-close-modal>OK</button>
         </div>
     </div>
 
