@@ -3,110 +3,225 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Форма обратной связи с БЭМ</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <title>Наши работы</title>
+    <style>
+        .section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .section__title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: #333;
+        }
+        
+        .media {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .media__image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #f9f9f9;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .form__group {
+            margin-bottom: 20px;
+        }
+        
+        .form__label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .form__input, .form__textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+        
+        .form__input:focus, .form__textarea:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
+        }
+        
+        .form__textarea {
+            resize: vertical;
+            min-height: 120px;
+            font-family: inherit;
+        }
+        
+        .form__submit {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            padding: 14px 35px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .form__submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,123,255,0.3);
+        }
+        
+        .form__submit:active {
+            transform: translateY(0);
+        }
+        
+        .form__error {
+            color: #dc3545;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .form__input:invalid:not(:focus), 
+        .form__textarea:invalid:not(:focus) {
+            border-color: #dc3545;
+        }
+    </style>
 </head>
 <body>
-
-    <header class="header">
-        <div class="container header__container">
-            <a href="/" class="header__brand">МойПроект</a>
-            <nav class="nav">
-                <ul class="nav__list">
-                    <li><a href="#main" class="nav__link nav__link--active">Главная</a></li>
-                    <li><a href="#about" class="nav__link">О нас</a></li>
-                    <li><a href="#contact" class="nav__link">Контакты</a></li>
-                </ul>
-            </nav>
+    <section class="section">
+        <h2 class="section__title">Наши работы</h2>
+        
+        <div class="media">
+            <img src="assets/images/hero-bg.jpg"
+                 alt="Пример нашего проекта - современный интерьер с панорамными окнами"
+                 class="media__image"
+                 width="800"
+                 height="450"
+                 loading="lazy">
         </div>
-    </header>
-
-    <main class="container" id="main">
-
-        <section class="hero">
-            <h1 class="hero__title">Добро пожаловать на наш сайт</h1>
-            <p class="hero__description">Мы создаём крутые веб-приложения с современным дизайном</p>
-        </section>
-
-     
-        <section class="section">
-            <h2 class="section__title">Форма обратной связи</h2>
-            <p>Нажмите кнопку ниже чтобы открыть форму</p>
+        
+        <form class="form" id="contactForm">
+            <div class="form__group">
+                <label for="userName" class="form__label">Ваше имя *</label>
+                <input type="text" 
+                       id="userName" 
+                       name="name" 
+                       class="form__input" 
+                       required 
+                       minlength="2"
+                       placeholder="Введите ваше имя">
+                <div class="form__error">Пожалуйста, введите ваше имя (минимум 2 символа)</div>
+            </div>
             
-            <button class="button" id="openDialog" type="button">Написать нам</button>
-        </section>
-
-        <section class="section">
-            <h2 class="section__title">Наши работы</h2>
-            <div class="media">
-                <img src="assets/images/hero-bg.jpg" 
-                    alt="Пример нашего проекта" 
-                    class="media_image" 
-                    width="800" 
-                    height="450" 
-                    loading="lazy">
-            </div>
-        </section>
-
-        <section class="section">
-            <h2 class="section__title">Видео о нас</h2>
-            <div class="media">
-                <video class="media__video" controls preload="metadata" poster="assets/video-poster.jpg">
-                    <source src="assets/demo-video.mp4" type="video/mp4">
-                    Ваш браузер не поддерживает видео.
-                </video>
-            </div>
-        </section>
-    </main>
-
-    <dialog class="modal" id="contactDialog" aria-labelledby="dialogTitle">
-        <h2 class="modal__title" id="dialogTitle">Обратная связь</h2>
-
-        <form class="form" id="contactForm" method="dialog" novalidate>
             <div class="form__group">
-                <label for="name" class="form__label">Имя *</label>
-                <input id="name" name="name" type="text" class="form__input" required minlength="2">
+                <label for="userEmail" class="form__label">Email *</label>
+                <input type="email" 
+                       id="userEmail" 
+                       name="email" 
+                       class="form__input" 
+                       required
+                       placeholder="example@mail.ru">
+                <div class="form__error">Пожалуйста, введите корректный email</div>
             </div>
-
+            
             <div class="form__group">
-                <label for="email" class="form__label">E-mail *</label>
-                <input id="email" name="email" type="email" class="form__input" required>
+                <label for="userPhone" class="form__label">Телефон</label>
+                <input type="tel" 
+                       id="userPhone" 
+                       name="phone" 
+                       class="form__input"
+                       placeholder="+7 (999) 999-99-99">
             </div>
-
+            
             <div class="form__group">
-                <label for="phone" class="form__label">Телефон *</label>
-                <input id="phone" name="phone" type="tel" class="form__input" 
-                       placeholder="+7 (900) 000-00-00" required>
-                <small class="form__help">Формат: +7 (900) 000-00-00</small>
+                <label for="userMessage" class="form__label">Сообщение *</label>
+                <textarea id="userMessage" 
+                          name="message" 
+                          class="form__textarea" 
+                          required 
+                          minlength="10"
+                          placeholder="Расскажите о вашем проекте..."></textarea>
+                <div class="form__error">Пожалуйста, введите сообщение (минимум 10 символов)</div>
             </div>
-
-            <div class="form__group">
-                <label for="topic" class="form__label">Тема *</label>
-                <select id="topic" name="topic" class="form__select" required>
-                    <option value="">Выберите тему</option>
-                    <option value="question">Вопрос</option>
-                    <option value="order">Заказ</option>
-                </select>
-            </div>
-
-            <div class="form__group">
-                <label for="message" class="form__label">Сообщение *</label>
-                <textarea id="message" name="message" rows="4" class="form__textarea" required></textarea>
-            </div>
-
-            <div class="form__actions">
-                <button type="button" class="button button--secondary" id="closeDialog">Закрыть</button>
-                <button type="submit" class="button">Отправить</button>
-            </div>
+            
+            <button type="submit" class="form__submit">Отправить заявку</button>
         </form>
-    </dialog>
+    </section>
 
-    <button class="button" id="themeToggle" type="button" aria-pressed="false" 
-            style="position: fixed; bottom: 20px; right: 20px;">
-        Тема
-    </button>
-
-    <script src="main.js"></script>
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const form = this;
+            const submitBtn = form.querySelector('.form__submit');
+            const originalText = submitBtn.textContent;
+            
+            // Валидация
+            let isValid = true;
+            const requiredFields = form.querySelectorAll('[required]');
+            
+            requiredFields.forEach(field => {
+                const error = field.parentNode.querySelector('.form__error');
+                if (!field.value.trim()) {
+                    error.style.display = 'block';
+                    isValid = false;
+                } else if (field.type === 'email' && !isValidEmail(field.value)) {
+                    error.style.display = 'block';
+                    isValid = false;
+                } else if (field.hasAttribute('minlength') && field.value.length < field.getAttribute('minlength')) {
+                    error.style.display = 'block';
+                    isValid = false;
+                } else {
+                    error.style.display = 'none';
+                }
+            });
+            
+            if (isValid) {
+                // Симуляция отправки
+                submitBtn.textContent = 'Отправка...';
+                submitBtn.disabled = true;
+                
+                setTimeout(() => {
+                    alert('Форма успешно отправлена! Мы свяжемся с вами в ближайшее время.');
+                    form.reset();
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }, 2000);
+            }
+        });
+        
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+        
+        // Скрываем ошибки при вводе
+        document.querySelectorAll('.form__input, .form__textarea').forEach(input => {
+            input.addEventListener('input', function() {
+                const error = this.parentNode.querySelector('.form__error');
+                error.style.display = 'none';
+            });
+        });
+    </script>
 </body>
 </html>
