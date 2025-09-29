@@ -131,4 +131,40 @@ document.addEventListener('DOMContentLoaded', function() {
             closeModal(modal.id);
         });
     });
+
+function initRealEstateModals() {
+  
+    const apartmentButtons = document.querySelectorAll('[onclick*="apartment"]');
+    apartmentButtons.forEach(btn => {
+        const originalOnClick = btn.getAttribute('onclick');
+        btn.removeAttribute('onclick');
+        btn.addEventListener('click', function() {
+            const modalId = originalOnClick.match(/'([^']+)'/)[1];
+            openModal(modalId);
+        });
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    initTheme();
+    initNavigation();
+    initModalCloseHandlers();
+    initLazyLoading();
+    initResponsiveImages();
+    initRealEstateModals(); 
+    
+    handleFormSubmit('contact-form', 'success-modal');
+    
+    if (themeToggle) {
+        themeToggle.addEventListener('click', toggleTheme);
+    }
+
+    const modalCloses = document.querySelectorAll('.modal__close');
+    modalCloses.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const modal = this.closest('.modal');
+            closeModal(modal.id);
+        });
+    });
+});
 });
